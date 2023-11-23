@@ -1,4 +1,5 @@
-var AWS = require("aws-sdk");
+const { CodePipeline } = require("@aws-sdk/client-codepipeline");
+
 var core = require("@actions/core");
 
 try {
@@ -8,12 +9,14 @@ try {
   var pipelineName = core.getInput("pipeline-name");
   var failOnError = core.getBooleanInput("fail-on-error");
 
-  AWS.config = new AWS.Config();
-  AWS.config.region = awsRegion;
-  AWS.config.accessKeyId = awsAccessKey;
-  AWS.config.secretAccessKey = awssecretKey;
+  var codepipeline = new CodePipeline({
+    region: awsRegion,
 
-  var codepipeline = new AWS.CodePipeline();
+    credentials: {
+      accessKeyId: awsAccessKey,
+      secretAccessKey: awssecretKey,
+    },
+  });
   var pipeline = {
     name: pipelineName,
   };
