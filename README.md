@@ -108,11 +108,11 @@ jobs:
 Feel free to fork and submit PRs for this project. I'm more than happy to review and merge it. If you have any questions regarding contributing, feel free to reach out to me on [Twitter](https://twitter.com/zulhhandyplast).
 
 ## Compilation
-Install `vercel/ncc`` by running this command in your terminal.
+Install `vercel/ncc` by running this command in your terminal.
 
 ```npm i -g @vercel/ncc```
 
-Compile your `index.js`` file.
+Compile your `index.js` file.
 
 ```ncc build index.js```
 
