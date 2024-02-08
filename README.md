@@ -88,6 +88,23 @@ By default, only a log message is displayed if Codepipeline call returns an erro
 
 By setting the input `fail-on-error` to `true` (`True` or `TRUE` are also accepted), the Github workflow will be marked as failed, and will interrupt the workflow run.
 
+## Get the CodePipelineExcutionId
+```
+jobs:
+  deploy:
+    steps:
+      - name: Trigger AWS CodePipeline
+        id: aws-codepipeline
+        uses: zulhfreelancer/aws-codepipeline-action@vX.X.X
+        with:
+          aws-region: "ap-southeast-1"
+          aws-access-key: ${{ secrets.AWS_PIPELINE_ACCESS_KEY }}
+          aws-secret-key: ${{ secrets.AWS_PIPELINE_SECRET_KEY }}
+          pipeline-name: "your-pipeline-name"
+
+      - name: Get the CodePipelineExecutionId
+        run: echo "CodePipelineExecutionId is ${{ steps.aws-codepipeline.outputs.codepipeline-execution-id }}"
+```
 
 ```
 jobs:
