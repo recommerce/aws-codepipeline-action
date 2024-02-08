@@ -88,7 +88,7 @@ By default, only a log message is displayed if Codepipeline call returns an erro
 
 By setting the input `fail-on-error` to `true` (`True` or `TRUE` are also accepted), the Github workflow will be marked as failed, and will interrupt the workflow run.
 
-## Get the CodePipelineExcutionId
+## Get the CodePipelineExecutionId
 ```
 jobs:
   deploy:
