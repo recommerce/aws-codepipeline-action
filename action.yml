@@ -17,6 +17,9 @@ inputs:
     description: "Fail the workflow if CodePipeline call returns an error"
     required: false
     default: "false"
+outputs:
+  codepipeline-execution-id:
+    description: "The execution ID of the triggered pipeline"
 runs:
   using: "node20"
   main: "dist/index.js"

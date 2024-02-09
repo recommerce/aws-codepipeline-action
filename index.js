@@ -1,23 +1,22 @@
 const { CodePipeline } = require("@aws-sdk/client-codepipeline");
-
-var core = require("@actions/core");
+const core = require("@actions/core");
 
 try {
-  var awsRegion = core.getInput("aws-region");
-  var awsAccessKey = core.getInput("aws-access-key");
-  var awssecretKey = core.getInput("aws-secret-key");
-  var pipelineName = core.getInput("pipeline-name");
-  var failOnError = core.getBooleanInput("fail-on-error");
+  const awsRegion = core.getInput("aws-region");
+  const awsAccessKey = core.getInput("aws-access-key");
+  const awsSecretKey = core.getInput("aws-secret-key");
+  const pipelineName = core.getInput("pipeline-name");
+  const failOnError = core.getBooleanInput("fail-on-error");
 
-  var codepipeline = new CodePipeline({
+  const codepipeline = new CodePipeline({
     region: awsRegion,
-
     credentials: {
       accessKeyId: awsAccessKey,
-      secretAccessKey: awssecretKey,
+      secretAccessKey: awsSecretKey,
     },
   });
-  var pipeline = {
+
+  const pipeline = {
     name: pipelineName,
   };
 
@@ -28,10 +27,11 @@ try {
         core.setFailed(`Action failed with error ${err}`);
       }
     } else {
-      core.info(okData);
+      core.info(okData.pipelineExecutionId);
+      core.setOutput("codepipeline-execution-id", okData.pipelineExecutionId);
     }
   });
 } catch (error) {
-  core.error(error.message)
+  core.error(error.message);
   core.setFailed(error.message);
 }
